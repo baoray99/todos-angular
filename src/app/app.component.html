@@ -1,0 +1,34 @@
+<!-- <h1>Welcome {{ title }}</h1> -->
+<!-- muon truyen bien thi dung dau {{}} -->
+<!-- <img [src]="title" /> -->
+<!-- muon truyen thuoc tinh trong the thi dung [] -->
+<!-- <h1
+  [style.color]="textColor"
+  (mouseover)="onMouseOn()"
+  (mouseout)="onMouseOut()"
+>
+  hello
+</h1> -->
+<!-- muon style the thi dung [ngStyle] truyen vao 1 object vs cac thuoc tinh -->
+<!-- <div [class.container]="container">hello2</div> -->
+<!-- hoac style nhu html css bth  -->
+<!-- <button (click)="toggleBorder()"> -->
+<!-- {{ container ? "Hide" : "Show" }} Border -->
+<!-- </button> -->
+<!-- <app-child [text]="title" (btnClicked)="receiveFromChild($event)"></app-child> -->
+<!-- truyen props từ cha sang con như trong react thì dung [] -->
+<!-- nhan gia tri tu con thi khai bao ham nhan data bang (ham) -->
+<!-- <app-child2></app-child2> -->
+<div class="wrapper">
+  <h1 class="title">todos</h1>
+  <div class="row">
+    <div class="todo-wrapper">
+      <app-header></app-header>
+      <app-todo-list></app-todo-list>
+      <app-footer></app-footer>
+    </div>
+  </div>
+  <small class="instruction">
+    <em>Press Enter to add new todo</em>
+  </small>
+</div>

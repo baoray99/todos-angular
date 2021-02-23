@@ -1,0 +1,19 @@
+<div class="footer">
+  <div class="content">
+    <span class="items-count"
+      >{{ length }} {{ length > 0 ? "items" : "item" }}</span
+    >
+    <div class="group-filter">
+      <button
+        type="button"
+        class="btn-filter"
+        *ngFor="let filter of filterButton"
+        [ngClass]="{ active: filter.isActive }"
+        (click)="toggleActive(filter.label)"
+      >
+        {{ filter.label }}
+      </button>
+    </div>
+    <button class="btn-clear">Clear Completed</button>
+  </div>
+</div>
