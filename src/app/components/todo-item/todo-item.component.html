@@ -1,1 +1,26 @@
-<p>todo-item works!</p>
+<div
+  class="item"
+  (mouseover)="isHoverd = true"
+  (mouseout)="isHoverd = false"
+  *ngFor="let todo of todos"
+>
+  <div class="todo">
+    <input type="checkbox" class="toggle" />
+    <label>{{ todo.content }}</label>
+  </div>
+  <div class="icon">
+    <span
+      class="icon-wrapper edit"
+      [ngClass]="{ active: isHoverd }"
+      (click)="isEditting = true"
+    >
+      <i class="fas fa-edit"></i>
+    </span>
+    <span class="icon-wrapper" [ngClass]="{ active: isHoverd }">
+      <i class="far fa-times-circle"></i>
+    </span>
+  </div>
+  <form class="edit-form" *ngIf="isEditting">
+    <input type="text" name="editTodo" />
+  </form>
+</div>

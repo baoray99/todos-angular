@@ -25,7 +25,8 @@
     <div class="todo-wrapper">
       <app-header></app-header>
       <app-todo-list></app-todo-list>
-      <app-footer></app-footer>
+      <app-footer *ngIf="hasTodos$ | async"></app-footer>
+      <!-- co async de xu li observable -->
     </div>
   </div>
   <small class="instruction">
