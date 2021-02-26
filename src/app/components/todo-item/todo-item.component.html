@@ -1,26 +1,37 @@
-<div
-  class="item"
-  (mouseover)="isHoverd = true"
-  (mouseout)="isHoverd = false"
-  *ngFor="let todo of todos"
->
+<div class="item" (mouseover)="isHoverd = true" (mouseout)="isHoverd = false">
   <div class="todo">
-    <input type="checkbox" class="toggle" />
-    <label>{{ todo.content }}</label>
+    <input
+      type="checkbox"
+      class="toggle"
+      [ngClass]="{ checked: todo.isCompleted }"
+      [id]="todo.id"
+      [checked]="todo.isCompleted"
+      (change)="changeTodoStatus()"
+    />
+    <label
+      [for]="todo.id"
+      [@fadeStrikeThrough]="todo.isCompleted ? 'completed' : 'active'"
+      >{{ todo.content }}</label
+    >
   </div>
   <div class="icon">
     <span
       class="icon-wrapper edit"
       [ngClass]="{ active: isHoverd }"
       (click)="isEditting = true"
+      [hidden]="todo.isCompleted"
     >
       <i class="fas fa-edit"></i>
     </span>
-    <span class="icon-wrapper" [ngClass]="{ active: isHoverd }">
+    <span
+      class="icon-wrapper"
+      [ngClass]="{ active: isHoverd }"
+      (click)="deleteTodo()"
+    >
       <i class="far fa-times-circle"></i>
     </span>
   </div>
-  <form class="edit-form" *ngIf="isEditting">
-    <input type="text" name="editTodo" />
+  <form class="edit-form" *ngIf="isEditting" (keyup)="submitEdited($event)">
+    <input type="text" name="editTodo" [(ngModel)]="todo.content" />
   </form>
 </div>

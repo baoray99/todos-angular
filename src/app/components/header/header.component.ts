@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor() { }
+  constructor(private todoServic: TodoService) { }
 
   ngOnInit(): void {
+  }
+  toggleALl(){
+    this.todoServic.toggleAll();
   }
 
 }
