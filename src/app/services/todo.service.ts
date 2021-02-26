@@ -13,7 +13,7 @@ export class TodoService implements OnInit {
   private filteredTodos: Todo[]; //clone All, Active, or Complete todos
   private lengthSubject: BehaviorSubject<number> = new BehaviorSubject<number>(
     0
-  );
+  ); //behaviorSubject se luu tru gia tri cuoi cung
   private displayTodosSubject: BehaviorSubject<Todo[]> = new BehaviorSubject<
     Todo[]
   >([]);
@@ -38,25 +38,24 @@ export class TodoService implements OnInit {
       TodoService.localStorageKey,
       JSON.stringify(this.todos)
     );
-    this.filterTodos(this.currentFilter, true);
+    this.filterTodos(this.currentFilter, false);
     this.updateTodosData();
   }
   filterTodos(filter: Filter, isFiltering: boolean = true) {
     this.currentFilter = filter;
     switch (filter) {
       case Filter.Active:
-        this.filteredTodos = this.todos.filter((todo) => {
-          !todo.isCompleted;
-        });
+        this.filteredTodos = this.todos.filter((todo) => !todo.isCompleted);
         break;
-      case Filter.Active:
-        this.filteredTodos = this.todos.filter((todo) => {
-          todo.isCompleted;
-        });
+      case Filter.Completed:
+        this.filteredTodos = this.todos.filter((todo) => todo.isCompleted);
         break;
       case Filter.All:
         this.filteredTodos = [...this.todos];
         break;
+    }
+    if (isFiltering) {
+      this.updateTodosData();
     }
   }
   addTodo(todoContent: string) {
@@ -73,7 +72,7 @@ export class TodoService implements OnInit {
     const index = this.todos.findIndex((todo) => todo.id === id);
     const todoTemp = this.todos[index];
     todoTemp.isCompleted = isCompleted;
-    this.todos.splice(index, 1, todoTemp); // xoa 1 phan tu va thay the bang phan tu moi
+    this.todos.splice(index, 1, todoTemp); // xoa 1 phan tu va thay the bang phan tu mo
     this.updateLocalStorage();
   }
   changeTodoContent(id: number, content: string) {
@@ -93,6 +92,10 @@ export class TodoService implements OnInit {
       return { ...todo, isCompleted: !this.todos.every((t) => t.isCompleted) }; // neu ko co cai nafo isCompleted thi bat, nguoc lai, neu 1 false 1 true thi true all
       //{...todo, isCompleted } se tao 1 mang nhung modify isCOmpleted
     });
+    this.updateLocalStorage();
+  }
+  clearCompleted() {
+    this.todos = this.todos.filter((todo) => !todo.isCompleted);
     this.updateLocalStorage();
   }
 }

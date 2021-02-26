@@ -44,7 +44,7 @@
   outline: none;
 }
 .footer .btn-clear {
-  visibility: visible;
+  visibility: hidden;
   padding: 5px;
   margin: 0 5px;
   border-radius: 0.25rem;
